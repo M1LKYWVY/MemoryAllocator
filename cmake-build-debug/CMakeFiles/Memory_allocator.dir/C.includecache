@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/c/Users/Dreamer/Development/CLionProjects/Memory_allocator/main.c
+stdio.h
+-
+mem.h
+/cygdrive/c/Users/Dreamer/Development/CLionProjects/Memory_allocator/mem.h
+
+/cygdrive/c/Users/Dreamer/Development/CLionProjects/Memory_allocator/mem.c
+mem.h
+/cygdrive/c/Users/Dreamer/Development/CLionProjects/Memory_allocator/mem.h
+
+/cygdrive/c/Users/Dreamer/Development/CLionProjects/Memory_allocator/mem.h
+stddef.h
+-
+stdint.h
+-
+stdio.h
+-
+sys/mman.h
+-
+stdbool.h
+-
+
+/cygdrive/c/Users/Dreamer/Development/CLionProjects/Memory_allocator/mem_debug.c
+mem.h
+/cygdrive/c/Users/Dreamer/Development/CLionProjects/Memory_allocator/mem.h
+

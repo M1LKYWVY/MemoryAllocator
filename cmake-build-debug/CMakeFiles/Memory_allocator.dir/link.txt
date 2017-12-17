@@ -1,0 +1,1 @@
+/usr/bin/cc -g  -Wl,--enable-auto-import CMakeFiles/Memory_allocator.dir/main.c.o CMakeFiles/Memory_allocator.dir/mem_debug.c.o CMakeFiles/Memory_allocator.dir/mem.c.o  -o Memory_allocator.exe -Wl,--out-implib,libMemory_allocator.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
