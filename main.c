@@ -2,11 +2,33 @@
 #include "mem.h"
 
 int main() {
-    heap_init(4096);
-    int* test = _malloc(128);
-    test[0] = 1;
-    test[1] = 2;
-    printf("%d %d\n", test[0], test[1]);
-    printf("Hello, World!\n");
+    void * p = heap_init(4096);
+
+    if(p == NULL) {
+        fprintf(stderr,"%s", "Cannot initialize heap!");
+        return 1;
+    }
+
+    int *pointers[80];
+
+    for (size_t i = 20; i < 100 ; ++i) {
+        pointers[i-20] = _malloc(i);
+        *pointers[i-20] = (int)i;
+        if(!pointers[i-20])
+            break;
+    }
+
+
+    FILE * f = fopen("heap.txt","w");
+    malloc_debug_heap(f,p);
+
+
+    for (int i = 20; i < 100; ++i) {
+        _free(pointers[i-20]);
+    }
+
+    f = fopen("heap_after_free.txt","w");
+    malloc_debug_heap(f,p);
+
     return 0;
 }

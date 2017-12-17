@@ -1,0 +1,98 @@
+bool is_initialized = false;
+
+void mark_chunk(size_t size, struct mem* chunk)
+{
+    struct mem chunk_header;
+    chunk_header.next = NULL;
+    chunk_header.capacity = size;
+    chunk_header.is_free = true;
+    *chunk = chunk_header;
+}
+//Initializing heap of memory
+void* heap_init(size_t initial_size)
+{
+    if(initial_size < sizeof(struct mem))
+        return NULL;
+    void* p = mmap(HEAP_START, initial_size,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS,-1,0);
+    if(p == MAP_FAILED)
+        return NULL;
+    mark_chunk(initial_size, p);
+    return p;
+}
+/*
+ * Shit box memory allocator. Made by m1lkywvy.
+ */
+void* _malloc( size_t query )
+{
+//    if (!is_initialized)
+//    {
+//        heap_init(32768);
+//        is_initialized = true;
+//    }
+    /*
+     * Check size of query. Modify if too small.
+     * There is no point in allocating small amount of memory.
+     */
+    if (query<MINIMAL_BLOCK_SIZE)
+    {
+        query = MINIMAL_BLOCK_SIZE;
+    }
+    /*
+     * Entry point of searching is address if heap start.
+     */
+    struct mem *node = (struct mem*)HEAP_START;
+
+    while (node)
+    {
+        if (node->is_free && node->capacity>query+MINIMAL_BLOCK_SIZE)
+        {
+            /*
+             * Calculating remaining amount of memory in current block.
+             */
+            size_t remainder = node->capacity-query;
+            node->capacity = remainder;
+            /*
+             * Splitting current block int two, return second with query of requested bytes.
+             */
+            struct mem *current = (struct mem*)((void*)node + node->capacity + sizeof(struct mem));
+            mark_chunk(query, current);
+            current->is_free = false;
+            current->next = node->next;
+            node->next = current;
+            return current;
+        }
+        /*
+         * If current node points to NULL, end reached. Asking OS of more structures.
+         */
+        if (!node->next)
+        {
+            void* next_chunk = mmap(node+node->capacity, query, PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED,-1,0);
+            if (next_chunk==MAP_FAILED)
+                next_chunk = mmap(0, query, PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED,-1,0);
+            if (next_chunk==MAP_FAILED)
+                return NULL;
+            node->next = (struct mem*) next_chunk;
+        }
+        /*
+         * Continue searching.
+         */
+        node = node->next;
+    }
+
+    void _free(void* mem)
+    {
+        if (mem==NULL)
+            return;
+        mem-=sizeof(struct mem);
+        struct mem* iterate = (struct mem*)mem;
+        iterate->is_free = true;
+        while (iterate->next)
+        {
+            if (iterate->next->is_free)
+            {
+                iterate->capacity=+iterate->next->capacity;
+                iterate->next = iterate->next->next;
+            }
+            iterate = iterate->next;
+        }
+    }

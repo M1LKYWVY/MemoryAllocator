@@ -3,8 +3,9 @@
 //
 
 #include "mem.h"
+size_t MIN_BLOCK_SIZE = 64;
 
-void mark_chunk(size_t size, struct mem* chunk)
+static void mark_chunk(size_t size, struct mem* chunk)
 {
     struct mem chunk_header;
     chunk_header.next = NULL;
@@ -12,7 +13,56 @@ void mark_chunk(size_t size, struct mem* chunk)
     chunk_header.is_free = true;
     *chunk = chunk_header;
 }
-//Initializing heap of memory
+
+void* _malloc(size_t query)
+{
+    if(query < MIN_BLOCK_SIZE)
+        query = MIN_BLOCK_SIZE;
+    struct mem *node = (struct mem*) HEAP_START;
+    while(node)
+    {
+        if(node->is_free && node->capacity>=query)
+        {
+            size_t remainder = node->capacity - query - sizeof(struct mem);
+            node->capacity = query + sizeof(struct mem);
+            struct mem *new = (struct mem*)((void*)node + node->capacity);
+            *new = *node;
+            new->capacity = remainder;
+            node->next = new;
+            node->is_free = false;
+            return (void*)node + sizeof(struct mem);
+        }
+
+        if(!node->next)
+        {
+            void* p = mmap((void*)node + node->capacity, query,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED,-1,0);
+
+            if(p == MAP_FAILED)
+            {
+                p = mmap(0, query,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS,-1,0);
+                if(p == MAP_FAILED)
+                    return NULL;
+            }
+            mark_chunk(query,p);
+            node->next = p;
+        }
+        node = node->next;
+    }
+}
+
+void _free(void* mem)
+{
+    mem -= sizeof(struct mem);
+    struct mem *chunk = (struct mem*)mem;
+    chunk->is_free = true;
+    struct mem *p = (void*)chunk+chunk->capacity;
+    while(p->is_free)
+    {
+        chunk->capacity += p->capacity;
+        p = (void*)chunk + chunk->capacity;
+    }
+}
+
 void* heap_init(size_t initial_size)
 {
     if(initial_size < sizeof(struct mem))
@@ -24,51 +74,6 @@ void* heap_init(size_t initial_size)
     return p;
 }
 
-void* _malloc( size_t query )
-{
-    /*
-     * Check size of query. Modify if too small.
-     * There is no point in allocating small amount of memory.
-     */
-    if (query<MINIMAL_BLOCK_SIZE)
-    {
-        query = MINIMAL_BLOCK_SIZE;
-    }
-
-    struct mem *node = (struct mem*)HEAP_START;
-
-    while (node)
-    {
-        if(node->is_free && node->capacity>query+MINIMAL_BLOCK_SIZE)
-        {
-            size_t remainder = node->capacity-query;
-//            printf("%d", (int)remainder);
-            node->capacity = remainder;
-            struct mem *current = (struct mem*)((void*)node + node->capacity + sizeof(struct mem));
-            mark_chunk(query, current);
-            current->is_free = false;
-            current->next = node->next;
-            node->next = current;
-            return current;
-
-        }
-        if (!node->next)
-        {
-            void* next_chunk = mmap(node+node->capacity, query, PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED,-1,0);
-            if (next_chunk==MAP_FAILED)
-                next_chunk = mmap(0, query, PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED,-1,0);
-            if (next_chunk==MAP_FAILED)
-                return NULL;
-            node->next = (struct mem*) next_chunk;
-        }
-        node = node->next;
-    }
-
-    void _free(void* mem)
-    {
-        mem-=sizeof(struct mem);
-        struct mem* iterate = (struct mem*)mem;
-    }
 
     void malloc_debug_struct_info( FILE* f, struct mem const* const address ) {
         size_t i;
@@ -87,5 +92,4 @@ void* _malloc( size_t query )
             malloc_debug_struct_info( f, ptr );
     }
 
-}
 

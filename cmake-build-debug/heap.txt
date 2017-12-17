@@ -1,0 +1,328 @@
+start: 0x4040000
+size: 49
+is_free: 0
+14000
+start: 0x4040031
+size: 49
+is_free: 0
+15000
+start: 0x4040062
+size: 49
+is_free: 0
+16000
+start: 0x4040093
+size: 49
+is_free: 0
+17000
+start: 0x40400c4
+size: 49
+is_free: 0
+18000
+start: 0x40400f5
+size: 49
+is_free: 0
+19000
+start: 0x4040126
+size: 49
+is_free: 0
+1A000
+start: 0x4040157
+size: 49
+is_free: 0
+1B000
+start: 0x4040188
+size: 49
+is_free: 0
+1C000
+start: 0x40401b9
+size: 49
+is_free: 0
+1D000
+start: 0x40401ea
+size: 49
+is_free: 0
+1E000
+start: 0x404021b
+size: 49
+is_free: 0
+1F000
+start: 0x404024c
+size: 49
+is_free: 0
+20000
+start: 0x404027d
+size: 50
+is_free: 0
+21000
+start: 0x40402af
+size: 51
+is_free: 0
+22000
+start: 0x40402e2
+size: 52
+is_free: 0
+23000
+start: 0x4040316
+size: 53
+is_free: 0
+24000
+start: 0x404034b
+size: 54
+is_free: 0
+25000
+start: 0x4040381
+size: 55
+is_free: 0
+26000
+start: 0x40403b8
+size: 56
+is_free: 0
+27000
+start: 0x40403f0
+size: 57
+is_free: 0
+28000
+start: 0x4040429
+size: 58
+is_free: 0
+29000
+start: 0x4040463
+size: 59
+is_free: 0
+2A000
+start: 0x404049e
+size: 60
+is_free: 0
+2B000
+start: 0x40404da
+size: 61
+is_free: 0
+2C000
+start: 0x4040517
+size: 62
+is_free: 0
+2D000
+start: 0x4040555
+size: 63
+is_free: 0
+2E000
+start: 0x4040594
+size: 64
+is_free: 0
+2F000
+start: 0x40405d4
+size: 65
+is_free: 0
+30000
+start: 0x4040615
+size: 66
+is_free: 0
+31000
+start: 0x4040657
+size: 67
+is_free: 0
+32000
+start: 0x404069a
+size: 68
+is_free: 0
+33000
+start: 0x40406de
+size: 69
+is_free: 0
+34000
+start: 0x4040723
+size: 70
+is_free: 0
+35000
+start: 0x4040769
+size: 71
+is_free: 0
+36000
+start: 0x40407b0
+size: 72
+is_free: 0
+37000
+start: 0x40407f8
+size: 73
+is_free: 0
+38000
+start: 0x4040841
+size: 74
+is_free: 0
+39000
+start: 0x404088b
+size: 75
+is_free: 0
+3A000
+start: 0x40408d6
+size: 76
+is_free: 0
+3B000
+start: 0x4040922
+size: 77
+is_free: 0
+3C000
+start: 0x404096f
+size: 78
+is_free: 0
+3D000
+start: 0x40409bd
+size: 79
+is_free: 0
+3E000
+start: 0x4040a0c
+size: 80
+is_free: 0
+3F000
+start: 0x4040a5c
+size: 81
+is_free: 0
+40000
+start: 0x4040aad
+size: 82
+is_free: 0
+41000
+start: 0x4040aff
+size: 83
+is_free: 0
+42000
+start: 0x4040b52
+size: 84
+is_free: 0
+43000
+start: 0x4040ba6
+size: 85
+is_free: 0
+44000
+start: 0x4040bfb
+size: 86
+is_free: 0
+45000
+start: 0x4040c51
+size: 87
+is_free: 0
+46000
+start: 0x4040ca8
+size: 88
+is_free: 0
+47000
+start: 0x4040d00
+size: 89
+is_free: 0
+48000
+start: 0x4040d59
+size: 90
+is_free: 0
+49000
+start: 0x4040db3
+size: 91
+is_free: 0
+4A000
+start: 0x4040e0e
+size: 92
+is_free: 0
+4B000
+start: 0x4040e6a
+size: 93
+is_free: 0
+4C000
+start: 0x4040ec7
+size: 94
+is_free: 0
+4D000
+start: 0x4040f25
+size: 95
+is_free: 0
+4E000
+start: 0x4040f84
+size: 96
+is_free: 0
+4F000
+start: 0x4040fe4
+size: 28
+is_free: 1
+0000
+start: 0x6ffffff0000
+size: 97
+is_free: 0
+50000
+start: 0x6ffffff0061
+size: 98
+is_free: 0
+51000
+start: 0x6ffffff00c3
+size: 99
+is_free: 0
+52000
+start: 0x6ffffff0126
+size: 100
+is_free: 0
+53000
+start: 0x6ffffff018a
+size: 101
+is_free: 0
+54000
+start: 0x6ffffff01ef
+size: 102
+is_free: 0
+55000
+start: 0x6ffffff0255
+size: 103
+is_free: 0
+56000
+start: 0x6ffffff02bc
+size: 104
+is_free: 0
+57000
+start: 0x6ffffff0324
+size: 105
+is_free: 0
+58000
+start: 0x6ffffff038d
+size: 106
+is_free: 0
+59000
+start: 0x6ffffff03f7
+size: 107
+is_free: 0
+5A000
+start: 0x6ffffff0462
+size: 108
+is_free: 0
+5B000
+start: 0x6ffffff04ce
+size: 109
+is_free: 0
+5C000
+start: 0x6ffffff053b
+size: 110
+is_free: 0
+5D000
+start: 0x6ffffff05a9
+size: 111
+is_free: 0
+5E000
+start: 0x6ffffff0618
+size: 112
+is_free: 0
+5F000
+start: 0x6ffffff0688
+size: 113
+is_free: 0
+60000
+start: 0x6ffffff06f9
+size: 114
+is_free: 0
+61000
+start: 0x6ffffff076b
+size: 115
+is_free: 0
+62000
+start: 0x6ffffff07de
+size: 116
+is_free: 0
+63000
+start: 0x6ffffff0852
+size: 18446744073709549566
+is_free: 1
+0000
