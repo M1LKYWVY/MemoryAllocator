@@ -6,7 +6,7 @@
 #define MIN_BLOCK_SIZE 64
 
 /*
- * Modify chopped chunk to get ready for next work.
+ * Modify chopped chunk to get ready for future work.
  */
 static void mark_chunk(size_t size, struct mem* chunk)
 {
@@ -83,7 +83,9 @@ void* _malloc(size_t query)
         node = node->next;
     }
 }
-
+/*
+ * Simple function to free allocated memory.
+ */
 void _free(void* mem)
 {
     /*
@@ -102,7 +104,8 @@ void _free(void* mem)
     {
         chunk->capacity += pointer->capacity;
         /*
-         * Continue only if ptr to next === address of this + capacity of this + sizeof(struct)
+         * Continue only if ptr to next === address of this + capacity of this + sizeof(struct).
+         * Address to next element in list can be int the other part of memory, in this case we do not need to check it.
          */
         pointer = (void*)chunk+chunk->capacity+ sizeof(struct mem);
     }

@@ -19,8 +19,10 @@ int main() {
     }
 
 
-    FILE * f = fopen("heap.txt","w");
+    FILE *f = fopen("heap.txt","w");
     malloc_debug_heap(f,p);
+    puts("Debug file \"heap.txt\" created. (After allocating)");
+    fclose(f);
 
 
     for (int i = 20; i < 100; ++i) {
@@ -29,6 +31,9 @@ int main() {
 
     f = fopen("heap_after_free.txt","w");
     malloc_debug_heap(f,p);
+    puts("Debug file \"heap_after_free.txt\" created. (After free)");
+
+    fclose(f);
 
     return 0;
 }

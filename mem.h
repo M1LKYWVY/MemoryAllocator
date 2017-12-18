@@ -12,9 +12,6 @@
 #include <sys/mman.h>
 #include <stdbool.h>
 #define HEAP_START ((void*)0x04040000)
-#define MINIMAL_BLOCK_SIZE 64
-
-
 
 struct mem;
 #pragma pack(push, 1)
