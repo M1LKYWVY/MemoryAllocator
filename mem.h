@@ -26,6 +26,6 @@ void _free( void* mem );
 void* heap_init( size_t initial_size );
 #define DEBUG_FIRST_BYTES 4
 void malloc_debug_struct_info(FILE* f, struct mem const* const address);
-void malloc_debug_heap(FILE* f, struct mem const* ptr);
+void malloc_debug_heap(FILE* f);
 
 #endif //MEMORY_ALLOCATOR_MEM_H
